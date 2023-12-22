@@ -8,14 +8,19 @@ repositories {
     mavenLocal()
 }
 
+configurations {
+    all*.exclude group: 'io.grpc', module: 'grpc-netty-shaded'
+}
+
 dependencies {
     implementation platform("com.google.cloud:libraries-bom:${librariesBomVersion}")
     implementation 'com.google.cloud:google-cloud-storage'
     implementation 'com.google.cloud:google-cloud-vertexai'
-    implementation 'io.grpc:grpc-netty-shaded'
+    implementation 'io.grpc:grpc-netty'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-grpc'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
@@ -39,3 +44,4 @@ compileJava {
 compileTestJava {
     options.encoding = 'UTF-8'
 }
+
